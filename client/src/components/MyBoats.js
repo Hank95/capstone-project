@@ -63,10 +63,13 @@ const Button = styled.button`
 const MyBoatCard = ({ boat, handleDelete }) => {
   const id = boat.id;
   const src = `/my-boats/${id}`;
+  const setSelected = (e) => {
+    console.log(e);
+  };
 
   return (
     <>
-      <ListingCard boat={boat} />
+      <ListingCard boat={boat} setSelected={setSelected} />
       <ActionButtons>
         <Button as={Link} to={src}>
           Edit

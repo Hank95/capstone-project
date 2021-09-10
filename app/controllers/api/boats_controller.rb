@@ -9,6 +9,7 @@ class Api::BoatsController < ApplicationController
 
     def create
         boat = @current_user.boats.create(boat_params)
+        byebug 
         render json: boat
     end
     def show
@@ -45,6 +46,6 @@ class Api::BoatsController < ApplicationController
     end
 
     def boat_params
-        params.permit(:title, :description, :price, :make, :model, :year, :length, :passengers, :crew, :bed, :sleep, :sailboat, :tender, :alcohol, :food, :extras, :location, :fuel, :lat, :long)
+        params.permit(:title, :description, :price, :make, :model, :year, :length, :passengers, :crew, :bed, :sleep, :sailboat, :tender, :alcohol, :food, :extras, :location, :fuel, :lat, :long, :photos)
     end
 end

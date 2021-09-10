@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Geocode from "react-geocode";
 import BoatForm from "./BoatForm";
@@ -8,6 +9,7 @@ Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [photoFile, setPhotoFile] = useState(null);
   const [boatData, setBoatData] = useState({
     title: "",
     description: "",
@@ -26,10 +28,13 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
     alcohol: "",
     food: "",
     extras: "",
-    location: "",
+    location: "Newport, RI",
     lat: "",
     long: "",
+    photos: "",
   });
+
+  let history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -39,7 +44,7 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
     let response = await Geocode.fromAddress(boatData.location);
     const { lat, lng } = await response.results[0].geometry.location;
 
-    let coordsData = { ...boatData, lat: lat, long: lng };
+    let coordsData = { ...boatData, lat: lat, long: lng, photos: photoFile };
 
     let fetchRes = await fetch(`/api/boats`, {
       method: "POST",
@@ -54,23 +59,13 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
     setIsLoading(false);
     setBoats([...boats, json]);
     setMyBoats([...myBoats, json]);
-
-    // fetch("/boats", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(boatData),
-    // }).then((r) => {
-    //   setIsLoading(false);
-    //   if (r.ok) {
-    //     r.json().then((data) => {
-    //       setBoats([...boats, data]);
-    //       setMyBoats([...myBoats, data]);
-    //     });
-    //   } else {
-    //     r.json().then((err) => setErrors(err.errors));
-    //   }
-    // });
+    history.push("/my-boats");
   }
+
+  function handleFile(e) {
+    setPhotoFile(e.target.files[0]);
+  }
+  console.log(photoFile);
 
   function handleChange(event) {
     const target = event.target;
@@ -92,6 +87,7 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
         <BoatForm
           boatData={boatData}
           handleChange={handleChange}
+          handleFile={handleFile}
           handleSubmit={handleSubmit}
           errors={errors}
           isLoading={isLoading}

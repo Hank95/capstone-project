@@ -3,6 +3,7 @@ import styled from "styled-components";
 const BoatForm = ({
   boatData,
   handleChange,
+  handleFile,
   handleSubmit,
   isLoading,
   errors,
@@ -196,9 +197,7 @@ const BoatForm = ({
           type="file"
           name="location"
           // value={boatData.location}
-          onChange={(e) => {
-            console.log(e.target.files);
-          }}
+          onChange={handleFile}
         />
       </FormField>
       <FormField>

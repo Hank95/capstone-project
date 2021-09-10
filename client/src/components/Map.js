@@ -63,7 +63,7 @@ function Map({ search, boats, setBoatsInBounds, selected, setSelected }) {
   const changeBounds = () => {
     const mapBounds = mapRef.current.getBounds().toJSON();
     fetch(
-      `/bounds?min_lat=${mapBounds.south}&max_lat=${mapBounds.north}&min_lng=${mapBounds.west}&max_lng=${mapBounds.east}`
+      `/api/bounds?min_lat=${mapBounds.south}&max_lat=${mapBounds.north}&min_lng=${mapBounds.west}&max_lng=${mapBounds.east}`
     )
       .then((response) => response.json())
       .then((json) => setBoatsInBounds(json));
