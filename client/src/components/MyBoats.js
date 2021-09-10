@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ListingCard from "./boatDetails/ListingCard";
@@ -7,7 +7,7 @@ const MyBoats = ({ myBoats, setMyBoats }) => {
   const handleDelete = (id) => {
     let updatedBoats = myBoats.filter((boat) => boat.id !== id);
     setMyBoats(updatedBoats);
-    fetch(`/boats/${id}`, {
+    fetch(`/api/boats/${id}`, {
       method: "DELETE",
     });
   };

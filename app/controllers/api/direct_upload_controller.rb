@@ -1,4 +1,4 @@
-class DirectUploadController < ApplicationController
+class Api::DirectUploadController < ApplicationController
     def create
         response = generate_direct_upload(blob_params)
         render json: response

@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::UsersController < ApplicationController
     wrap_parameters format: []
 
     skip_before_action :authorize, only: [:create]

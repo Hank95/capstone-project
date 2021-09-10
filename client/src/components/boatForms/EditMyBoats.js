@@ -35,7 +35,7 @@ const EditMyBoats = ({ boats, setBoats, myBoats, setMyBoats }) => {
   const id = useParams().id;
 
   useEffect(() => {
-    fetch(`/boats/${id}`)
+    fetch(`/api/boats/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setBoatData(data);
@@ -64,7 +64,7 @@ const EditMyBoats = ({ boats, setBoats, myBoats, setMyBoats }) => {
 
     let coordsData = { ...boatData, lat: lat, long: lng };
 
-    let fetchRes = await fetch(`/boats/${id}`, {
+    let fetchRes = await fetch(`/api/boats/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(coordsData),
@@ -130,22 +130,22 @@ const Divider = styled.hr`
   border-bottom: 1px solid #ccc;
   margin: 16px 0 16px 0;
 `;
-const Button = styled.button`
-  cursor: pointer;
-  font-size: 1.3rem;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  padding: 8px 16px;
-  text-decoration: none;
-  width: 100%;
-  background-color: rgba(58, 142, 216, 1);
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
+// const Button = styled.button`
+//   cursor: pointer;
+//   font-size: 1.3rem;
+//   border: 1px solid transparent;
+//   border-radius: 6px;
+//   padding: 8px 16px;
+//   text-decoration: none;
+//   width: 100%;
+//   background-color: rgba(58, 142, 216, 1);
+//   display: flex;
+//   justify-content: center;
+//   align-self: center;
+//   a {
+//     color: inherit;
+//     text-decoration: none;
+//   }
+// `;
 
 export default EditMyBoats;

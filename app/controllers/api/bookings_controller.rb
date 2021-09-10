@@ -1,4 +1,4 @@
-class BookingsController < ApplicationController
+class Api::BookingsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
     wrap_parameters format: []
 

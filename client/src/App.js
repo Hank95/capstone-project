@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     auth.autoSignIn();
 
-    fetch("/bookings").then((r) => {
+    fetch("/api/bookings").then((r) => {
       if (r.ok) {
         r.json().then((data) => setMyBookings(data));
       }
@@ -40,7 +40,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch("/boats").then((r) => {
+    fetch("/api/boats").then((r) => {
       if (r.ok) {
         r.json().then((data) => setBoats(data));
       }

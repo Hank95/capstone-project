@@ -1,4 +1,4 @@
-class BoatsController < ApplicationController
+class Api::BoatsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
     wrap_parameters format: []
 

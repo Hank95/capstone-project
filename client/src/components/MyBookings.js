@@ -5,7 +5,7 @@ const MyBookings = ({ myBookings, setMyBookings }) => {
   const handleDelete = (id) => {
     let updatedBookings = myBookings.filter((boat) => boat.id !== id);
     setMyBookings(updatedBookings);
-    fetch(`/bookings/${id}`, {
+    fetch(`/api/bookings/${id}`, {
       method: "DELETE",
     });
   };

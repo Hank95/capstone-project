@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import SearchBar from "../SearchBar";
 
 const BoatForm = ({
   boatData,
@@ -8,36 +7,6 @@ const BoatForm = ({
   isLoading,
   errors,
 }) => {
-  const handleUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    this.setState({ loading: true });
-
-    const payload = await fetch(`/presigned_url`).then((res) => res.json());
-
-    const url = payload.url;
-    const formData = new FormData();
-
-    Object.keys(payload.fields).forEach((key) =>
-      formData.append(key, payload.fields[key])
-    );
-    formData.append("file", file);
-
-    const xml = await fetch(url, {
-      method: "POST",
-      body: formData,
-    }).then((res) => res.text());
-
-    const uploadUrl = new DOMParser()
-      .parseFromString(xml, "application/xml")
-      .getElementsByTagName("Location")[0].textContent;
-
-    this.setState({
-      loading: false,
-      url: uploadUrl,
-    });
-  };
   return (
     <form onSubmit={handleSubmit}>
       <FormField>

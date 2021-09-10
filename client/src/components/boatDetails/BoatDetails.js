@@ -12,7 +12,7 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
   const id = useParams().id;
 
   useEffect(() => {
-    fetch(`/boats/${id}`)
+    fetch(`/api/boats/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setBoatDetails(data);
@@ -27,7 +27,7 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
       return alert("This is your boat");
     }
     e.preventDefault();
-    fetch("/bookings", {
+    fetch("/api/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -171,11 +171,6 @@ const FormField = styled.div`
   &:not(:last-child) {
     margin-bottom: 12px;
   }
-`;
-
-const Error = styled.div`
-  color: red;
-  font-size: 30px;
 `;
 
 const Label = styled.label`

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Geocode from "react-geocode";
 import BoatForm from "./BoatForm";
@@ -41,7 +41,7 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
 
     let coordsData = { ...boatData, lat: lat, long: lng };
 
-    let fetchRes = await fetch(`/boats`, {
+    let fetchRes = await fetch(`/api/boats`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(coordsData),

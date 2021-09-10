@@ -1,2 +1,0 @@
-class BoatCategoriesController < ApplicationController
-end
