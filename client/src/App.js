@@ -38,6 +38,7 @@ function App() {
       }
     });
   }, []);
+  console.log(myBookings);
 
   useEffect(() => {
     fetch("/api/boats").then((r) => {
@@ -74,12 +75,7 @@ function App() {
           />
         </PrivateRoute>
         <PrivateRoute path="/listings">
-          <Listings
-            search={search}
-            setSearch={setSearch}
-            boats={boats}
-            setBoats={setBoats}
-          />
+          <Listings search={search} setSearch={setSearch} />
         </PrivateRoute>
         <PrivateRoute path="/my-bookings">
           <MyBookings myBookings={myBookings} setMyBookings={setMyBookings} />

@@ -23,13 +23,16 @@ const MyBookings = ({ myBookings, setMyBookings }) => {
 
   const handleUpdate = (bookingData, id) => {
     console.log(bookingData);
-    fetch(`/bookings/${id}`, {
+    fetch(`/api/bookings/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookingData),
     })
       .then((res) => res.json())
-      .then((json) => setMyBookings(() => updateBoats(myBookings, json)));
+      .then((json) => {
+        console.log(json);
+        setMyBookings(() => updateBoats(myBookings, json));
+      });
   };
   return (
     <Wrapper>

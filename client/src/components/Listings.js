@@ -4,10 +4,9 @@ import Map from "./Map";
 import ListingCard from "./boatDetails/ListingCard";
 import SearchBar from "./SearchBar";
 
-const Listings = ({ boats, search, setSearch }) => {
+const Listings = ({ search, setSearch }) => {
   const [boatsInBounds, setBoatsInBounds] = useState([]);
   const [selected, setSelected] = useState(null);
-  console.log(selected);
 
   return (
     <>

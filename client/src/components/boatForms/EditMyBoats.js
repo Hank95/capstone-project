@@ -7,6 +7,7 @@ import BoatForm from "./BoatForm";
 const EditMyBoats = ({ boats, setBoats, myBoats, setMyBoats }) => {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [photoFile, setPhotoFile] = useState("");
   const [boatData, setBoatData] = useState({
     title: "",
     description: "",
@@ -25,7 +26,7 @@ const EditMyBoats = ({ boats, setBoats, myBoats, setMyBoats }) => {
     alcohol: "",
     food: "",
     extras: "",
-    location: "",
+    location: "Newport, RI",
     lat: "",
     long: "",
   });
@@ -62,12 +63,37 @@ const EditMyBoats = ({ boats, setBoats, myBoats, setMyBoats }) => {
     let response = await Geocode.fromAddress(boatData.location);
     const { lat, lng } = await response.results[0].geometry.location;
 
-    let coordsData = { ...boatData, lat: lat, long: lng };
+    // let coordsData = { ...boatData, lat: lat, long: lng };
+    const formData = new FormData();
+    formData.append("title", boatData.title);
+    formData.append("description", boatData.description);
+    formData.append("price", boatData.price);
+    formData.append("make", boatData.make);
+    formData.append("model", boatData.model);
+    formData.append("year", boatData.year);
+    formData.append("length", boatData["length"]);
+    formData.append("passengers", boatData.passengers);
+    formData.append("crew", boatData.crew);
+    formData.append("bed", boatData.bed);
+    formData.append("sleep", boatData.sleep);
+    formData.append("sailboat", boatData.sailboat);
+    formData.append("fuel", boatData.fuel);
+    formData.append("tender", boatData.tender);
+    formData.append("alcohol", boatData.alcohol);
+    formData.append("food", boatData.food);
+    formData.append("extras", boatData.extras);
+    formData.append("location", boatData.location);
+    formData.append("lat", lat);
+    formData.append("long", lng);
+    if (photoFile) {
+      formData.append("photo", photoFile);
+    }
+    console.log(formData);
 
     let fetchRes = await fetch(`/api/boats/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(coordsData),
+      // headers: { "Content-Type": "application/json" },
+      body: formData,
     });
 
     if (!fetchRes.ok) {
@@ -78,7 +104,9 @@ const EditMyBoats = ({ boats, setBoats, myBoats, setMyBoats }) => {
     setMyBoats(() => handleUpdate(myBoats, json));
     setBoats(() => handleUpdate(boats, json));
   }
-
+  function handleFile(e) {
+    setPhotoFile(e.target.files[0]);
+  }
   function handleChange(event) {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -99,6 +127,7 @@ const EditMyBoats = ({ boats, setBoats, myBoats, setMyBoats }) => {
         <BoatForm
           boatData={boatData}
           handleChange={handleChange}
+          handleFile={handleFile}
           handleSubmit={handleSubmit}
           errors={errors}
           isLoading={isLoading}

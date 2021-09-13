@@ -51,6 +51,7 @@ const Image = styled.img`
   width: 100px;
   margin-left: 10px;
   border-radius: 6px;
+  object-fit: cover;
   /* color: white;
   align-items: center;
   justify-content: center;

@@ -11,7 +11,6 @@ const MyBoats = ({ myBoats, setMyBoats }) => {
       method: "DELETE",
     });
   };
-  console.log(myBoats);
 
   if (myBoats.length === 0) {
     return (
@@ -64,7 +63,7 @@ const MyBoatCard = ({ boat, handleDelete }) => {
   const id = boat.id;
   const src = `/my-boats/${id}`;
   const setSelected = (e) => {
-    console.log(e);
+    return null;
   };
 
   return (

@@ -19,10 +19,12 @@ const MyBookingsCard = ({ myBooking, handleDelete, handleUpdate }) => {
       {
         date: bookingDate,
         guests: passengers,
-        boat_id: myBooking.id,
       },
       myBooking.id
     );
+  };
+  const setSelected = (e) => {
+    console.log(e);
   };
 
   return (
@@ -31,7 +33,7 @@ const MyBookingsCard = ({ myBooking, handleDelete, handleUpdate }) => {
         {handleDate(myBooking.date)}, {myBooking.guests} Guests
       </Info>
 
-      <ListingCard boat={myBooking.boat} />
+      <ListingCard boat={myBooking.boat} setSelected={setSelected} />
       <ActionButtons>
         {editing ? (
           <Button onClick={() => setEditing(false)}>Cancel</Button>

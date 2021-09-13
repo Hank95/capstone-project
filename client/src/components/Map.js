@@ -6,18 +6,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-// import usePlacesAutoComplete, {
-//   getGeocode,
-//   getLatLng,
-// } from "use-places-autocomplete";
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from "@reach/combobox";
-// import "@reach/combobox/styles.css";
+import MarkerCard from "./MarkerCard";
 
 import anchor from "./assets/anchor.svg";
 import compass from "./assets/compass-f.svg";
@@ -73,8 +62,6 @@ function Map({ search, boats, setBoatsInBounds, selected, setSelected }) {
     setCenter(search);
   }, [search]);
 
-  console.log(selected);
-
   if (loadError) return "Error loading map";
 
   if (!isLoaded) return "Loading map";
@@ -93,7 +80,7 @@ function Map({ search, boats, setBoatsInBounds, selected, setSelected }) {
       >
         {boats.map((marker) => (
           <Marker
-            key={`${marker.lat}-${marker.long}`}
+            key={marker.id}
             position={{ lat: marker.lat, lng: marker.long }}
             onClick={() => {
               console.log(marker);
@@ -113,9 +100,7 @@ function Map({ search, boats, setBoatsInBounds, selected, setSelected }) {
                   setSelected(null);
                 }}
               >
-                <div>
-                  <h2>Boat</h2>
-                </div>
+                <MarkerCard boat={marker} />
               </InfoWindow>
             ) : null}
           </Marker>
@@ -145,59 +130,5 @@ function Locate({ panTo }) {
     </button>
   );
 }
-
-// function Search({ panTo }) {
-//   const {
-//     ready,
-//     value,
-//     suggestions: { status, data },
-//     setValue,
-//     clearSuggestions,
-//   } = usePlacesAutoComplete({
-//     // requestOptions: {
-//     //   location: { lat: () => 41.4605, lng: () => -76.57959 },
-//     //   radius: 100 * 1000,
-//     // },
-//   });
-//   const handleInput = (e) => {
-//     setValue(e.target.value);
-//   };
-
-//   const handleSelect = async (address) => {
-//     console.log(address);
-//     setValue(address, false);
-//     clearSuggestions();
-
-//     try {
-//       const results = await getGeocode({ address });
-//       console.log(results[0]);
-//       const { lat, lng } = await getLatLng(results[0]);
-//       panTo({ lat, lng });
-//     } catch (error) {
-//       console.log("😱 Error: ", error);
-//     }
-//   };
-
-//   return (
-//     <div className="search">
-//       <Combobox onSelect={handleSelect}>
-//         <ComboboxInput
-//           value={value}
-//           onChange={handleInput}
-//           disabled={!ready}
-//           placeholder="Search your location"
-//         />
-//         <ComboboxPopover>
-//           <ComboboxList>
-//             {status === "OK" &&
-//               data.map(({ id, description }) => (
-//                 <ComboboxOption key={id} value={description} />
-//               ))}
-//           </ComboboxList>
-//         </ComboboxPopover>
-//       </Combobox>
-//     </div>
-//   );
-// }
 
 export default React.memo(Map);

@@ -44,7 +44,7 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
     let response = await Geocode.fromAddress(boatData.location);
     const { lat, lng } = await response.results[0].geometry.location;
 
-    let coordsData = { ...boatData, lat: lat, long: lng, photos: photoFile };
+    // let coordsData = { ...boatData, lat: lat, long: lng, photos: photoFile };
 
     const formData = new FormData();
     formData.append("title", boatData.title);
@@ -64,7 +64,7 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
     formData.append("alcohol", boatData.alcohol);
     formData.append("food", boatData.food);
     formData.append("extras", boatData.extras);
-    formData.append("location", boatData.title);
+    formData.append("location", boatData.location);
     formData.append("lat", lat);
     formData.append("long", lng);
     if (photoFile) {
@@ -90,7 +90,6 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
   function handleFile(e) {
     setPhotoFile(e.target.files[0]);
   }
-  console.log(photoFile);
 
   function handleChange(event) {
     const target = event.target;
@@ -102,7 +101,6 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
     });
   }
 
-  console.log(boatData);
   return (
     <Page>
       <Wrapper>

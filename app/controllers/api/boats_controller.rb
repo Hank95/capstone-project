@@ -4,20 +4,20 @@ class Api::BoatsController < ApplicationController
 
     def index
         boats = Boat.all
-        render json: boats
+        render json: boats, each_serializer: BoatPicsSerializer
     end
 
     def create
         boat = @current_user.boats.create(boat_params)
-        render json: boat
+        render json: boat, serializer: BoatPicsSerializer
     end
     def show
         boat = find_boat
-        render json: boat
+        render json: boat, serializer: BoatPicsSerializer
     end
 
     def update 
-        boat = find_boat
+        boat = Boat.find(params[:id])
         boat.update(boat_params)
         render json: boat
     end
@@ -29,7 +29,7 @@ class Api::BoatsController < ApplicationController
 
     def bounds 
         boats = Boat.search(search_params.to_h.symbolize_keys)
-        render json: boats
+        render json: boats, each_serializer: BoatPicsSerializer
     end
 
       
