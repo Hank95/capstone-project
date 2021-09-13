@@ -45,14 +45,14 @@ function App() {
         r.json().then((data) => setBoats(data));
       }
     });
-  }, [search]);
+  }, []);
 
   useEffect(() => {
     if (auth.user) {
       setMyBoats(auth.user.boats);
     }
   }, [auth.user]);
-  console.log(search);
+  console.log(boats);
   if (loadError) return "Error loading searchbar";
 
   if (!isLoaded) return "Loading map";

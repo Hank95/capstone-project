@@ -3,13 +3,12 @@ class Api::BoatsController < ApplicationController
     wrap_parameters format: []
 
     def index
-        boats = Boat.all
-        render json: boats 
+        boats = Boat.all.with_attached_photo
+        render json: boats.as_json(root: false, methods: :photo_url)
     end
 
     def create
         boat = @current_user.boats.create(boat_params)
-        byebug 
         render json: boat
     end
     def show

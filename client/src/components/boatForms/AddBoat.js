@@ -46,14 +46,39 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
 
     let coordsData = { ...boatData, lat: lat, long: lng, photos: photoFile };
 
+    const formData = new FormData();
+    formData.append("title", boatData.title);
+    formData.append("description", boatData.description);
+    formData.append("price", boatData.price);
+    formData.append("make", boatData.make);
+    formData.append("model", boatData.model);
+    formData.append("year", boatData.year);
+    formData.append("length", boatData["length"]);
+    formData.append("passengers", boatData.passengers);
+    formData.append("crew", boatData.crew);
+    formData.append("bed", boatData.bed);
+    formData.append("sleep", boatData.sleep);
+    formData.append("sailboat", boatData.sailboat);
+    formData.append("fuel", boatData.fuel);
+    formData.append("tender", boatData.tender);
+    formData.append("alcohol", boatData.alcohol);
+    formData.append("food", boatData.food);
+    formData.append("extras", boatData.extras);
+    formData.append("location", boatData.title);
+    formData.append("lat", lat);
+    formData.append("long", lng);
+    if (photoFile) {
+      formData.append("photos", photoFile);
+    }
+
     let fetchRes = await fetch(`/api/boats`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(coordsData),
+      // headers: { "Content-Type": "application/json" },
+      body: formData,
     });
 
     if (!fetchRes.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      console.log(`HTTP error! status: ${response.status}`);
     }
     let json = await fetchRes.json();
     setIsLoading(false);

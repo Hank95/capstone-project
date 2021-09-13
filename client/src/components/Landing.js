@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 // import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { useAuth } from "../util/use-auth";
 import dock from "./assets/dock.jpeg";
 import SearchBar from "./SearchBar";
 

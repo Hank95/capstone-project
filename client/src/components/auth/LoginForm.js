@@ -72,7 +72,7 @@ const Label = styled.label`
   margin-bottom: 8px;
 `;
 const Input = styled.input`
-  /* border-radius: 6px; */
+  border-radius: 6px;
   border: 1px solid transparent;
   border-color: #dbdbdb;
   -webkit-appearance: none;
@@ -86,11 +86,11 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 1.3rem;
   border: 1px solid transparent;
-  /* border-radius: 6px; */
+  border-radius: 6px;
   padding: 8px 16px;
   text-decoration: none;
   width: 100%;
-  background-color: rgba(0, 57, 7, 0.5);
+  background-color: rgb(58, 142, 216);
   display: flex;
   justify-content: center;
   align-self: center;

@@ -1,6 +1,8 @@
 class Boat < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   belongs_to :user
-  has_many_attached :photos
+  has_one_attached :photo
   has_many :reviews
   # has_many :bookings
   # has_many :users, through: :bookings
@@ -17,9 +19,14 @@ class Boat < ApplicationRecord
       limit(API_RESULTS_LIMIT)
   end
 
-  def image_url
-    if image.attached?
-      image.blob.service_url
+  def photo_url
+    if photo.attached?
+      url_for(self.photo)
+      # photos.blobs
     end
   end
+
+  # def get_image_url
+  #   rails_blog_url(self.photos)
+  # end
 end

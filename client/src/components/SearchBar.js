@@ -60,7 +60,7 @@ function SearchBar({ setSearch }) {
           value={value}
           onChange={handleInput}
           disabled={!ready}
-          placeholder="Search your location"
+          placeholder="Find your boat"
         />
         <ComboboxPopover>
           <ComboboxList>
