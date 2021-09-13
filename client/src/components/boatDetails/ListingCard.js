@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 
 const ListingCard = ({ boat, setSelected }) => {
   const src = `/listings/${boat.id}`;
+  // const imageSrc = `https://ahoyphotos.s3.us-east-2.amazonaws.com/${boat.photo_blob.key}`;
+  let imageSrc = "";
+  if (boat.photo_blob) {
+    imageSrc = `https://ahoyphotos.s3.us-east-2.amazonaws.com/${boat.photo_blob.key}`;
+  } else {
+  }
   return (
     <Card
       as={Link}
@@ -10,7 +16,7 @@ const ListingCard = ({ boat, setSelected }) => {
       onMouseEnter={() => setSelected(boat)}
       onMouseLeave={() => setSelected(null)}
     >
-      <Image>AHOY!</Image>
+      <Image src={imageSrc} alt="Ahoy Boat!" />
       <Content>
         <h2>{boat.title}</h2>
         <p>
@@ -40,14 +46,15 @@ const Content = styled.div`
   margin-left: 25px;
   /* padding: 10px; */
 `;
-const Image = styled.div`
+const Image = styled.img`
   height: 100px;
   width: 100px;
   margin-left: 10px;
-  color: white;
+  border-radius: 6px;
+  /* color: white;
   align-items: center;
   justify-content: center;
-  background-color: rgb(58, 142, 216);
+  background-color: rgb(58, 142, 216); */
 `;
 
 export default ListingCard;

@@ -68,7 +68,7 @@ const AddBoat = ({ myBoats, setMyBoats, boats, setBoats }) => {
     formData.append("lat", lat);
     formData.append("long", lng);
     if (photoFile) {
-      formData.append("photos", photoFile);
+      formData.append("photo", photoFile);
     }
 
     let fetchRes = await fetch(`/api/boats`, {

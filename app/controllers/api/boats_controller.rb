@@ -3,8 +3,8 @@ class Api::BoatsController < ApplicationController
     wrap_parameters format: []
 
     def index
-        boats = Boat.all.with_attached_photo
-        render json: boats.as_json(root: false, methods: :photo_url)
+        boats = Boat.all
+        render json: boats
     end
 
     def create
@@ -45,6 +45,6 @@ class Api::BoatsController < ApplicationController
     end
 
     def boat_params
-        params.permit(:title, :description, :price, :make, :model, :year, :length, :passengers, :crew, :bed, :sleep, :sailboat, :tender, :alcohol, :food, :extras, :location, :fuel, :lat, :long, :photos)
+        params.permit(:title, :description, :price, :make, :model, :year, :length, :passengers, :crew, :bed, :sleep, :sailboat, :tender, :alcohol, :food, :extras, :location, :fuel, :lat, :long, :photo)
     end
 end

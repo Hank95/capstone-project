@@ -1,6 +1,4 @@
 class Boat < ApplicationRecord
-  include Rails.application.routes.url_helpers
-
   belongs_to :user
   has_one_attached :photo
   has_many :reviews
@@ -20,13 +18,12 @@ class Boat < ApplicationRecord
   end
 
   def photo_url
-    if photo.attached?
-      url_for(self.photo)
-      # photos.blobs
+    if self.photo.attached?
+      self.photo.blob
     end
   end
 
-  # def get_image_url
-  #   rails_blog_url(self.photos)
-  # end
+  def host
+    host = self.user
+  end
 end

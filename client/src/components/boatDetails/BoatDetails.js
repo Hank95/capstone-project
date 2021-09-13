@@ -8,6 +8,7 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
   const [bookingDate, setBookingDate] = useState(0);
   const [passengers, setPassengers] = useState(0);
   const [booked, setBooked] = useState(false);
+  const [urlKey, setUrlKey] = useState("");
 
   const id = useParams().id;
 
@@ -17,6 +18,7 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
       .then((data) => {
         setBoatDetails(data);
         setIsLoaded(true);
+        setUrlKey(data.photo_blob.key);
       });
   }, [id]);
   console.log(myBoats);
@@ -49,7 +51,8 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
   //     [event.target.name]: [event.target.value],
   //   });
   // };
-  console.log(bookingDate);
+  console.log(urlKey);
+  let src = `https://ahoyphotos.s3.us-east-2.amazonaws.com/${urlKey}`;
 
   if (!isLoaded) return <h2>Loading...</h2>;
 
@@ -61,7 +64,9 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
           {boatDetails.year} {boatDetails.make}, {boatDetails.model}
         </h3>
       </Title>
-      <Images>Pictures of boat</Images>
+      <Images>
+        <Image src={src} alt="boat image" />
+      </Images>
       <Details>
         <Description>
           <h3>
@@ -141,10 +146,19 @@ const Title = styled.div`
   border-bottom: 3px solid black;
 `;
 const Images = styled.div`
+  display: flex;
   width: 100%;
   height: 500px;
+  justify-content: center;
+  align-items: center;
   border-bottom: 3px solid black;
 `;
+
+const Image = styled.img`
+  object-fit: cover;
+  height: 100%;
+`;
+
 const Details = styled.div`
   display: grid;
   grid-template-columns: 3fr 2fr;
