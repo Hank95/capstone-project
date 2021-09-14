@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useAuth } from "../../util/use-auth";
+import { useHistory } from "react-router-dom";
 
 function SignUpForm({ onLogin }) {
   const [signUpData, setSignUpData] = useState({
@@ -11,12 +12,14 @@ function SignUpForm({ onLogin }) {
     join_date: "",
   });
   const today = new Date();
+  const history = useHistory();
 
   const auth = useAuth();
 
   function handleSubmit(e) {
     e.preventDefault();
     auth.signup(signUpData);
+    history.push("/");
   }
   function handleChange(event) {
     setSignUpData({

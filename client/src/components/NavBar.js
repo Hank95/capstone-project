@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../util/use-auth";
 import UserMenu from "./UserMenu";
-import ahoy from "./assets/Ahoy.svg";
+import ahoy from "./assets/Ahoyicon.svg";
 
 const NavBar = () => {
   const auth = useAuth();
@@ -64,7 +64,7 @@ const NavButton = styled.button`
 `;
 
 const Logo = styled.img`
-  margin-top: 16px;
+  margin-top: 6px;
 `;
 
 export default NavBar;

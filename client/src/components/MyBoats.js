@@ -1,15 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ListingCard from "./boatDetails/ListingCard";
+import MyBoatCard from "./MyBoatCard";
 
-const MyBoats = ({ myBoats, setMyBoats }) => {
+const MyBoats = ({ myBoats, setMyBoats, myBookings, setMyBookings }) => {
   const handleDelete = (id) => {
     let updatedBoats = myBoats.filter((boat) => boat.id !== id);
     setMyBoats(updatedBoats);
     fetch(`/api/boats/${id}`, {
       method: "DELETE",
     });
+  };
+
+  const updateBoats = (boats, updatedBoat) => {
+    const updatedBoats = boats.map((boat) => {
+      if (boat.id === updatedBoat.id) {
+        return (boat = updatedBoat);
+      } else {
+        return boat;
+      }
+    });
+    return updatedBoats;
+  };
+
+  const handleAccepted = (id) => {
+    fetch(`/api/bookings/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ accepted: true }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setMyBookings(() => updateBoats(myBookings, json));
+      });
   };
 
   if (myBoats.length === 0) {
@@ -27,7 +50,12 @@ const MyBoats = ({ myBoats, setMyBoats }) => {
     <Wrapper>
       <h1>My Boats!</h1>
       {myBoats.map((boat) => (
-        <MyBoatCard key={boat.id} boat={boat} handleDelete={handleDelete} />
+        <MyBoatCard
+          key={boat.id}
+          boat={boat}
+          handleDelete={handleDelete}
+          handleAccepted={handleAccepted}
+        />
       ))}
       <Button as={Link} to="/add-a-boat">
         {" "}
@@ -59,36 +87,37 @@ const Button = styled.button`
   }
 `;
 
-const MyBoatCard = ({ boat, handleDelete }) => {
-  const id = boat.id;
-  const src = `/my-boats/${id}`;
-  const setSelected = (e) => {
-    return null;
-  };
+// const MyBoatCard = ({ boat, handleDelete }) => {
+//   const id = boat.id;
+//   const src = `/my-boats/${id}`;
+//   const setSelected = (e) => {
+//     return null;
+//   };
+//   console.log(boat);
 
-  return (
-    <>
-      <ListingCard boat={boat} setSelected={setSelected} />
-      <ActionButtons>
-        <Button as={Link} to={src}>
-          Edit
-        </Button>
-        <Button onClick={() => handleDelete(id)}>Delete</Button>
-      </ActionButtons>
-      <Divider />
-    </>
-  );
-};
+//   return (
+//     <>
+//       <ListingCard boat={boat} setSelected={setSelected} />
+//       <ActionButtons>
+//         <Button as={Link} to={src}>
+//           Edit
+//         </Button>
+//         <Button onClick={() => handleDelete(id)}>Delete</Button>
+//       </ActionButtons>
+//       <Divider />
+//     </>
+//   );
+// };
 
-const Divider = styled.hr`
-  border: none;
-  border-bottom: 1px solid #ccc;
-  margin: 16px 0 16px 0;
-`;
+// const Divider = styled.hr`
+//   border: none;
+//   border-bottom: 1px solid #ccc;
+//   margin: 16px 0 16px 0;
+// `;
 
-const ActionButtons = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 50px;
-`;
+// const ActionButtons = styled.div`
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   column-gap: 50px;
+// `;
 export default MyBoats;

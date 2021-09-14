@@ -21,8 +21,6 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
         setUrlKey(data.photo_blob.key);
       });
   }, [id]);
-  console.log(myBoats);
-  console.log(boatDetails);
 
   const handleSubmit = (e) => {
     if (myBoats.includes(boatDetails)) {
@@ -45,13 +43,6 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
       });
   };
 
-  // const handleChange = (event) => {
-  //   setBookingDetails({
-  //     ...bookingDetails,
-  //     [event.target.name]: [event.target.value],
-  //   });
-  // };
-  console.log(urlKey);
   let src = `https://ahoyphotos.s3.us-east-2.amazonaws.com/${urlKey}`;
 
   if (!isLoaded) return <h2>Loading...</h2>;

@@ -7,6 +7,11 @@ class Api::BoatsController < ApplicationController
         render json: boats, each_serializer: BoatPicsSerializer
     end
 
+    def owned 
+        boats = @current_user.boats  
+        render json: boats
+    end
+
     def create
         boat = @current_user.boats.create(boat_params)
         render json: boat, serializer: BoatPicsSerializer

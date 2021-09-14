@@ -30,8 +30,13 @@ const MyBookingsCard = ({ myBooking, handleDelete, handleUpdate }) => {
   return (
     <BookingCard>
       <Info>
-        {handleDate(myBooking.date)}, {myBooking.guests} Guests
+        {handleDate(myBooking.date)}, {myBooking.guests} guests
       </Info>
+      <Accepted>
+        {myBooking.accepted
+          ? "This booking has been accepted by the Host!"
+          : "The booking is still pending"}
+      </Accepted>
 
       <ListingCard boat={myBooking.boat} setSelected={setSelected} />
       <ActionButtons>
@@ -40,7 +45,10 @@ const MyBookingsCard = ({ myBooking, handleDelete, handleUpdate }) => {
         ) : (
           <Button onClick={() => setEditing(true)}>Edit</Button>
         )}
-        <Button onClick={() => handleDelete(myBooking.id)}>
+        <Button
+          disable={myBooking.accepted}
+          onClick={() => handleDelete(myBooking.id)}
+        >
           Cancel Booking
         </Button>
       </ActionButtons>
@@ -82,6 +90,10 @@ const BookingCard = styled.div`
 const Info = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
+`;
+const Accepted = styled.div`
+  font-size: 1.2rem;
+  font-weight: 500;
 `;
 const Button = styled.button`
   cursor: pointer;

@@ -30,7 +30,6 @@ const MyBookings = ({ myBookings, setMyBookings }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setMyBookings(() => updateBoats(myBookings, json));
       });
   };

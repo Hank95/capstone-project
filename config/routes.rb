@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     delete "/logout", to: "sessions#destroy"
 
     get "/bounds", to: "boats#bounds"
+    get "/owned", to: "boats#owned"
 
     post '/presigned_url', to: 'direct_upload#create'
 

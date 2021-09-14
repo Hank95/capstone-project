@@ -15,14 +15,12 @@ import MyBookings from "./components/MyBookings";
 const GOOGLE_KEY = `${process.env.REACT_APP_API_KEY}`;
 
 const libraries = ["places"];
-// const API_KEY = process.env.REACT_APP_API_ENDPOINT;
 
 function App() {
   const [search, setSearch] = useState(null);
   const [boats, setBoats] = useState([]);
   const [myBoats, setMyBoats] = useState([]);
   const [myBookings, setMyBookings] = useState([]);
-  // const API_KEY = process.env.REACT_APP_API_ENDPOINT;
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: GOOGLE_KEY,
     libraries,
@@ -31,12 +29,6 @@ function App() {
   const auth = useAuth();
   useEffect(() => {
     auth.autoSignIn();
-
-    fetch("/api/bookings").then((r) => {
-      if (r.ok) {
-        r.json().then((data) => setMyBookings(data));
-      }
-    });
   }, []);
 
   useEffect(() => {
@@ -45,13 +37,18 @@ function App() {
         r.json().then((data) => setBoats(data));
       }
     });
-  }, []);
-
-  useEffect(() => {
-    if (auth.user) {
-      setMyBoats(auth.user.boats);
-    }
+    fetch("/api/owned").then((r) => {
+      if (r.ok) {
+        r.json().then((data) => setMyBoats(data));
+      }
+    });
+    fetch("/api/bookings").then((r) => {
+      if (r.ok) {
+        r.json().then((data) => setMyBookings(data));
+      }
+    });
   }, [auth.user]);
+
   if (loadError) return "Error loading searchbar";
 
   if (!isLoaded) return "Loading map";
@@ -95,7 +92,12 @@ function App() {
           />
         </PrivateRoute>
         <PrivateRoute path="/my-boats">
-          <MyBoats myBoats={myBoats} setMyBoats={setMyBoats} />
+          <MyBoats
+            myBoats={myBoats}
+            setMyBoats={setMyBoats}
+            myBookings={myBookings}
+            setMyBookings={setMyBookings}
+          />
         </PrivateRoute>
       </Switch>
     </div>

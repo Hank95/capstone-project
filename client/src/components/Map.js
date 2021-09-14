@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import styled from "styled-components";
 import {
   GoogleMap,
   useLoadScript,
@@ -8,7 +7,7 @@ import {
 } from "@react-google-maps/api";
 import MarkerCard from "./MarkerCard";
 
-import anchor from "./assets/anchor.svg";
+// import anchor from "./assets/anchor.svg";
 import compass from "./assets/compass-f.svg";
 
 const GOOGLE_KEY = `${process.env.REACT_APP_API_KEY}`;
