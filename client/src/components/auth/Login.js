@@ -40,7 +40,7 @@ const Image = styled.img`
   width: 100%;
   position: absolute;
   /* height: 100vh; */
-  /* z-index: -100; */
+  z-index: -100;
 `;
 const Wrapper = styled.section`
   position: relative;

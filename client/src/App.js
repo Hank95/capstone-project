@@ -38,7 +38,6 @@ function App() {
       }
     });
   }, []);
-  console.log(myBookings);
 
   useEffect(() => {
     fetch("/api/boats").then((r) => {
@@ -53,7 +52,6 @@ function App() {
       setMyBoats(auth.user.boats);
     }
   }, [auth.user]);
-  console.log(boats);
   if (loadError) return "Error loading searchbar";
 
   if (!isLoaded) return "Loading map";

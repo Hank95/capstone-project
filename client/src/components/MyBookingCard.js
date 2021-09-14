@@ -24,7 +24,7 @@ const MyBookingsCard = ({ myBooking, handleDelete, handleUpdate }) => {
     );
   };
   const setSelected = (e) => {
-    console.log(e);
+    return null;
   };
 
   return (

@@ -30,6 +30,6 @@ class Api::BookingsController < ApplicationController
     end
 
     def booking_params
-        params.permit(:id, :date, :guests)
+        params.permit(:id, :date, :guests, :boat_id)
     end
 end
