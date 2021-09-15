@@ -4,7 +4,7 @@ class Api::BoatsController < ApplicationController
 
     def index
         boats = Boat.all
-        render json: boats, each_serializer: BoatPicsSerializer
+        render json: boats
     end
 
     def owned 
@@ -14,11 +14,11 @@ class Api::BoatsController < ApplicationController
 
     def create
         boat = @current_user.boats.create(boat_params)
-        render json: boat, serializer: BoatPicsSerializer
+        render json: boat
     end
     def show
         boat = find_boat
-        render json: boat, serializer: BoatPicsSerializer
+        render json: boat
     end
 
     def update 
@@ -34,7 +34,7 @@ class Api::BoatsController < ApplicationController
 
     def bounds 
         boats = Boat.search(search_params.to_h.symbolize_keys)
-        render json: boats, each_serializer: BoatPicsSerializer
+        render json: boats
     end
 
       

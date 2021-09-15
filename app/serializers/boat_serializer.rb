@@ -5,22 +5,17 @@ class BoatSerializer < ActiveModel::Serializer
   has_many :bookings
 
 
-  # def book 
-  #   object.bookings.each do |booking|
-  #     return booking.user
-  #   end
-  # end
-
-
   def photo_blob
     if object.photo.attached?
       object.photo.blob
     end
   end
 
-  # def image_url
-  #   url_for(self.image)
-  # end
+  
+
+
+
+
 
 
 
