@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MyBookingsCard from "./MyBookingCard";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const MyBookings = ({ myBookings, setMyBookings }) => {
   const handleDelete = (id) => {
@@ -36,31 +37,38 @@ const MyBookings = ({ myBookings, setMyBookings }) => {
 
   if (myBookings.length === 0) {
     return (
-      <Wrapper>
-        <h3>Likes like you don't have any bookings yet!</h3>
-        <Button as={Link} to="/">
-          {" "}
-          Search for Boats
-        </Button>
-      </Wrapper>
+      <>
+        <Wrapper>
+          <h3>Likes like you don't have any bookings yet!</h3>
+          <Button as={Link} to="/">
+            {" "}
+            Search for Boats
+          </Button>
+        </Wrapper>
+        <Footer />
+      </>
     );
   }
   return (
-    <Wrapper>
-      <h1>My Bookings</h1>
-      {myBookings.map((myBooking) => (
-        <MyBookingsCard
-          key={myBooking.id}
-          myBooking={myBooking}
-          handleDelete={handleDelete}
-          handleUpdate={handleUpdate}
-        />
-      ))}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <h1>My Bookings</h1>
+        {myBookings.map((myBooking) => (
+          <MyBookingsCard
+            key={myBooking.id}
+            myBooking={myBooking}
+            handleDelete={handleDelete}
+            handleUpdate={handleUpdate}
+          />
+        ))}
+      </Wrapper>
+      <Footer />
+    </>
   );
 };
 
 const Wrapper = styled.div`
+  min-height: 100vh;
   margin: auto;
   max-width: 65%;
 `;

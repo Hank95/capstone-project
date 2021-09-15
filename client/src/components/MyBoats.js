@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MyBoatCard from "./MyBoatCard";
+import Footer from "./Footer";
 
 const MyBoats = ({ myBoats, setMyBoats, myBookings, setMyBookings }) => {
   const handleDelete = (id) => {
@@ -37,37 +38,46 @@ const MyBoats = ({ myBoats, setMyBoats, myBookings, setMyBookings }) => {
 
   if (myBoats.length === 0) {
     return (
-      <Wrapper>
-        <h3>Likes like you don't have any boats yet!</h3>
-        <Button as={Link} to="/add-a-boat">
-          {" "}
-          List Your Boat
-        </Button>
-      </Wrapper>
+      <>
+        <Wrapper>
+          <h3>Likes like you don't have any boats yet!</h3>
+          <Button as={Link} to="/add-a-boat">
+            {" "}
+            List Your Boat
+          </Button>
+        </Wrapper>
+        <Footer />
+      </>
     );
   }
   return (
-    <Wrapper>
-      <h1>My Boats!</h1>
-      {myBoats.map((boat) => (
-        <MyBoatCard
-          key={boat.id}
-          boat={boat}
-          handleDelete={handleDelete}
-          handleAccepted={handleAccepted}
-        />
-      ))}
-      <Button as={Link} to="/add-a-boat">
-        {" "}
-        Add another boat!
-      </Button>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <h1>My Boats!</h1>
+        {myBoats.map((boat) => (
+          <MyBoatCard
+            key={boat.id}
+            boat={boat}
+            handleDelete={handleDelete}
+            handleAccepted={handleAccepted}
+          />
+        ))}
+        <Button as={Link} to="/add-a-boat">
+          {" "}
+          Add another boat!
+        </Button>
+      </Wrapper>
+      <Footer />
+    </>
   );
 };
 
 const Wrapper = styled.div`
+  min-height: 100vh;
   margin: auto;
   max-width: 65%;
+  margin-bottom: 15px;
+  position: relative;
 `;
 const Button = styled.button`
   cursor: pointer;
@@ -87,37 +97,4 @@ const Button = styled.button`
   }
 `;
 
-// const MyBoatCard = ({ boat, handleDelete }) => {
-//   const id = boat.id;
-//   const src = `/my-boats/${id}`;
-//   const setSelected = (e) => {
-//     return null;
-//   };
-//   console.log(boat);
-
-//   return (
-//     <>
-//       <ListingCard boat={boat} setSelected={setSelected} />
-//       <ActionButtons>
-//         <Button as={Link} to={src}>
-//           Edit
-//         </Button>
-//         <Button onClick={() => handleDelete(id)}>Delete</Button>
-//       </ActionButtons>
-//       <Divider />
-//     </>
-//   );
-// };
-
-// const Divider = styled.hr`
-//   border: none;
-//   border-bottom: 1px solid #ccc;
-//   margin: 16px 0 16px 0;
-// `;
-
-// const ActionButtons = styled.div`
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
-//   column-gap: 50px;
-// `;
 export default MyBoats;

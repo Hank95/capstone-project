@@ -11,6 +11,7 @@ import BoatDetails from "./components/boatDetails/BoatDetails";
 import MyBoats from "./components/MyBoats";
 import EditMyBoats from "./components/boatForms/EditMyBoats";
 import MyBookings from "./components/MyBookings";
+import Footer from "./components/Footer";
 
 const GOOGLE_KEY = `${process.env.REACT_APP_API_KEY}`;
 
