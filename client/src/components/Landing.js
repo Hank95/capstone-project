@@ -29,10 +29,10 @@ const Container = styled.div`
   width: 25vw;
   max-width: 700px;
   min-width: 300px;
-  padding: 33px;
-  padding-right: 47px;
+  padding: 5px;
+  padding-right: 25px;
   border-radius: 6px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
 `;
 
 export default Landing;

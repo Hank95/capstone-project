@@ -1,8 +1,5 @@
 // Hook (use-auth.js)
 import React, { useState, useContext, createContext } from "react";
-// import { useHistory } from "react-router-dom";
-
-// const API_KEY = process.env.REACT_APP_API_ENDPOINT;
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...

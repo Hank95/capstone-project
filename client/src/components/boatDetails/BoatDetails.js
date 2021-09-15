@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Reviews from "./Reviews";
 
 const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
   const [boatDetails, setBoatDetails] = useState([]);
@@ -9,6 +10,7 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
   const [passengers, setPassengers] = useState(0);
   const [booked, setBooked] = useState(false);
   const [urlKey, setUrlKey] = useState("");
+  const [reviews, setReviews] = useState([]);
 
   const id = useParams().id;
 
@@ -20,7 +22,27 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
         setIsLoaded(true);
         setUrlKey(data.photo_blob.key);
       });
+
+    fetch(`/api/reviews/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+      });
   }, [id]);
+
+  const createReview = (content, rating) => {
+    fetch("/api/reviews", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        boat_id: id,
+        content: content,
+        rating: rating,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => setReviews([...reviews, json]));
+  };
 
   const handleSubmit = (e) => {
     if (myBoats.includes(boatDetails)) {
@@ -125,6 +147,7 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
           <GridItem>Sleeps {boatDetails.sleep}</GridItem>
         ) : null}
       </Specifications>
+      <Reviews reviews={reviews} createReview={createReview} />
     </Container>
   );
 };

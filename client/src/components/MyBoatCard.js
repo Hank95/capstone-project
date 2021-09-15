@@ -20,6 +20,7 @@ const MyBoatCard = ({ boat, handleDelete, handleAccepted }) => {
         </Button>
         <Button onClick={() => handleDelete(id)}>Delete</Button>
       </ActionButtons>
+
       <Button onClick={() => setClicked(!clicked)}>
         {clicked ? "Close" : "Bookings"}
       </Button>
