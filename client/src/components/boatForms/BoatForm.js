@@ -192,10 +192,10 @@ const BoatForm = ({
         />
       </FormField>
       <FormField>
-        <Label htmlFor="location">Location:</Label>
+        <Label htmlFor="photo">Photo:</Label>
         <Input
           type="file"
-          name="location"
+          name="photo"
           // value={boatData.location}
           onChange={handleFile}
         />

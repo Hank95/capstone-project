@@ -117,6 +117,7 @@ const Button = styled.button`
   border-radius: 6px;
   padding: 8px 16px;
   text-decoration: none;
+  margin: 5px;
   width: 100%;
   background-color: rgba(58, 142, 216, 1);
   display: flex;

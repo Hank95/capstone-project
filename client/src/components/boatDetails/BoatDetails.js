@@ -83,7 +83,7 @@ const BoatDetails = ({ myBookings, setMyBookings, myBoats }) => {
       <Details>
         <Description>
           <h3>
-            Hosted by: {boatDetails.user.username}, location:
+            Hosted by: {boatDetails.user.username}, Location:{" "}
             {boatDetails.location}
           </h3>
           <h3>Description:</h3>
@@ -171,6 +171,8 @@ const Images = styled.div`
 const Image = styled.img`
   object-fit: cover;
   height: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 const Details = styled.div`
@@ -183,6 +185,9 @@ const Description = styled.div`
 `;
 const Booking = styled.div`
   padding: 15px;
+  background-color: rgba(239, 239, 239);
+  border-radius: 6px;
+  margin: 15px;
 `;
 const Specifications = styled.div`
   display: grid;
