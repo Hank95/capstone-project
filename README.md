@@ -6,6 +6,9 @@ Welcome to my Castone Project for the Flatiron School Software Engineer Program.
 
 Check out the live version of this project [here](http://ahoy-boats.herokuapp.com).
 
+Check out a video walk-through of this project!(Click the image for a video)
+[![AHOY Video](https://img.youtube.com/vi/RFWkbkm5nu4/0.jpg)](https://www.youtube.com/watch?v=RFWkbkm5nu4)
+
 Browse some boats, rent a boat, post a boat!
 
 ##Local Setup
